@@ -1,0 +1,16 @@
+{
+  "name": "keyboard-simulator",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "start:test":
+      "webpack-dev-server --open --config webpack.dev.js & npm run test:watch",
+    "build": "webpack --config webpack.prod.js",
+    "lint": "eslint --ext .jsx --ext .js src/",
+    "test": "jest",
+    "test:watch": "npm test -- --watch"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
