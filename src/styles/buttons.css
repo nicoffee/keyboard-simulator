@@ -8,6 +8,7 @@ button {
   color: white;
   font-weight: bold;
   font-size: inherit;
+  cursor: pointer;
 
   &.start-button {
     font-size: 50px;
@@ -15,5 +16,9 @@ button {
 
   &.stop-button {
     background-color: #e74c3c;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

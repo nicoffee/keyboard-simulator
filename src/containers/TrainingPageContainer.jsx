@@ -1,12 +1,16 @@
 import { connect } from 'react-redux';
 import TrainingPage from './../components/TrainingPage';
-import { updateErrorsCount, updateResultStatus } from './../actions';
+import { updateResults, resetResults } from './../actions';
 
 const mapStateToProps = state => {
-  return { errorsCount: state.errorsCount, status: state.status };
+  return {
+    errorsCount: state.errorsCount,
+    status: state.status,
+    remainingTime: state.remainingTime
+  };
 };
 
 export default connect(mapStateToProps, {
-  updateErrorsCount,
-  updateResultStatus
+  updateResults,
+  resetResults
 })(TrainingPage);

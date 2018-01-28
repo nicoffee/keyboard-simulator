@@ -78,3 +78,13 @@ body {
 :global .negative {
   color: #e74c3c;
 }
+
+:global .unfinished {
+  color: #f1c40f;
+}
+
+:global .start-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}

@@ -8,13 +8,14 @@ class TrainingPage extends Component {
   constructor() {
     super();
 
-    const lettersArray = this.generateRandomLettersArray(1072, 1103, 2);
+    const lettersArray = this.generateRandomLettersArray(1072, 1103, 5);
 
     this.state = {
-      allTime: 5,
-      remainingTime: 5,
+      allTime: 60,
+      remainingTime: 60,
       symbolPosition: 0,
       symbolsCount: lettersArray.length,
+      errorsCount: 0,
       lettersArray
     };
   }
@@ -43,6 +44,8 @@ class TrainingPage extends Component {
   };
 
   componentDidMount() {
+    this.props.resetResults();
+
     this.timerId = setInterval(
       () =>
         this.setState({
@@ -58,11 +61,18 @@ class TrainingPage extends Component {
   componentDidUpdate() {
     if (this.state.remainingTime <= 0) {
       clearInterval(this.timerId);
-
-      this.props.updateResultStatus('negative');
+      this.props.updateResults({
+        status: 'negative',
+        remainingTime: 0,
+        errorsCount: this.state.errorsCount
+      });
       setTimeout(() => this.props.history.push('/results'), 500);
     } else if (this.state.symbolPosition === this.state.symbolsCount) {
-      this.props.updateResultStatus('positive');
+      this.props.updateResults({
+        status: 'positive',
+        remainingTime: this.state.remainingTime,
+        errorsCount: this.state.errorsCount
+      });
       setTimeout(() => this.props.history.push('/results'), 500);
     }
   }
@@ -90,10 +100,9 @@ class TrainingPage extends Component {
       const newArr = lettersArray;
       newArr[symbolPosition].status = 'error';
       this.setState({
+        errorsCount: ++this.state.errorsCount,
         lettersArray: newArr
       });
-
-      this.props.updateErrorsCount(this.props.errorsCount);
     }
   }
 
@@ -105,7 +114,7 @@ class TrainingPage extends Component {
           Прошло времени:{' '}
           {this.formatTime(this.state.allTime - this.state.remainingTime)}
         </div>
-        <div>Кол-во ошибок: {this.props.errorsCount}</div>
+        <div>Кол-во ошибок: {this.state.errorsCount}</div>
         <div>Осталось символов: {this.state.symbolsCount}</div>
         <div className="letters-container">
           {this.state.lettersArray.map((letter, index) => (
@@ -114,8 +123,16 @@ class TrainingPage extends Component {
             </div>
           ))}
         </div>
-        <button className="stop-button">
-          <Link to="/results">Закончить</Link>
+        <button
+          className="stop-button"
+          onClick={() => {
+            this.props.updateResults({
+              status: 'unfinished',
+              remainingTime: this.state.remainingTime
+            });
+            setTimeout(() => this.props.history.push('/results'), 500);
+          }}>
+          Закончить
         </button>
       </div>
     );

@@ -1,15 +1,16 @@
-const rootReducer = (state = { errorsCount: 0, status: null }, action) => {
+const rootReducer = (
+  state = { errorsCount: 0, status: null, remainingTime: null },
+  action
+) => {
   switch (action.type) {
-    case 'UPDATE_ERROS_COUNT':
+    case 'UPDATE_RESULTS':
       return {
-        ...state,
-        errorsCount: ++action.payload
+        remainingTime: action.payload.remainingTime,
+        status: action.payload.status,
+        errorsCount: action.payload.errorsCount
       };
-    case 'UPDATE_RESULT_STATUS':
-      return {
-        ...state,
-        status: action.payload
-      };
+    case 'RESET_RESULTS':
+      return { errorsCount: 0, status: null, remainingTime: null };
     default:
       return state;
   }
