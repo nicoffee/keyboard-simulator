@@ -1,0 +1,11 @@
+.link {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+
+  img {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+  }
+}

@@ -1,0 +1,19 @@
+@import './colors.css';
+
+button {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 25px;
+  background-color: var(--success-color);
+  color: white;
+  font-weight: bold;
+  font-size: inherit;
+
+  &.start-button {
+    font-size: 50px;
+  }
+
+  &.stop-button {
+    background-color: #e74c3c;
+  }
+}
