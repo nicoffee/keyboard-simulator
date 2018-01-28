@@ -1,4 +1,9 @@
-export const updateResults = payload => ({
-  type: 'UPDATE_RESULTS',
+export const updateErrorsCount = payload => ({
+  type: 'UPDATE_ERROS_COUNT',
+  payload
+});
+
+export const updateResultStatus = payload => ({
+  type: 'UPDATE_RESULT_STATUS',
   payload
 });
