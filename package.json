@@ -37,6 +37,7 @@
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-react": "^7.6.0",
     "eslint-plugin-standard": "^3.0.1",
+    "jest": "^22.1.4",
     "postcss-loader": "^2.0.10",
     "postcss-nested": "^3.0.0",
     "prop-types": "^15.6.0",
