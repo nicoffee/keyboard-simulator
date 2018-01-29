@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import backLogo from './../img/001-left-arrow.svg';
 import repeatLogo from './../img/002-redo.svg';
-import styles from './../styles/components/results-page.css';
+import styles from './../styles/components/results-page.css'; // eslint-disable-line no-unused-vars
 
 const ResultsPage = ({ errorsCount, remainingTime, status }) => (
   <div>

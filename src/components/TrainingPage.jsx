@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class TrainingPage extends Component {
+  static propTypes = {
+    updateResults: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    status: PropTypes.string
+  };
+
   constructor() {
     super();
 
     const lettersArray = this.generateRandomLettersArray(1072, 1103, 5);
+    const TIMER = 60;
 
     this.state = {
-      allTime: 60,
-      remainingTime: 60,
+      allTime: TIMER,
+      remainingTime: TIMER,
       symbolPosition: 0,
       symbolsCount: lettersArray.length,
       errorsCount: 0,
@@ -44,13 +49,17 @@ class TrainingPage extends Component {
   };
 
   componentDidMount() {
-    this.props.resetResults();
+    this.props.updateResults({
+      errorsCount: 0,
+      status: null,
+      remainingTime: null
+    });
 
     this.timerId = setInterval(
       () =>
         this.setState({
-          remainingTime: --this.state.remainingTime,
-          spentTime: ++this.state.spentTime
+          remainingTime: this.state.remainingTime - 1,
+          spentTime: this.state.spentTime + 1
         }),
       1000
     );
@@ -59,21 +68,23 @@ class TrainingPage extends Component {
   }
 
   componentDidUpdate() {
-    if (this.state.remainingTime <= 0) {
+    if (this.props.status === 'positive') {
+      this.props.history.push('/results');
+    } else if (this.props.status === 'negative') {
+      setTimeout(() => this.props.history.push('/results'), 500);
+    } else if (this.state.remainingTime <= 0) {
       clearInterval(this.timerId);
       this.props.updateResults({
         status: 'negative',
         remainingTime: 0,
         errorsCount: this.state.errorsCount
       });
-      setTimeout(() => this.props.history.push('/results'), 500);
     } else if (this.state.symbolPosition === this.state.symbolsCount) {
       this.props.updateResults({
         status: 'positive',
         remainingTime: this.state.remainingTime,
         errorsCount: this.state.errorsCount
       });
-      setTimeout(() => this.props.history.push('/results'), 500);
     }
   }
 
@@ -94,13 +105,13 @@ class TrainingPage extends Component {
 
       this.setState({
         lettersArray: newArr,
-        symbolPosition: ++this.state.symbolPosition
+        symbolPosition: this.state.symbolPosition + 1
       });
     } else {
       const newArr = lettersArray;
       newArr[symbolPosition].status = 'error';
       this.setState({
-        errorsCount: ++this.state.errorsCount,
+        errorsCount: this.state.errorsCount + 1,
         lettersArray: newArr
       });
     }
@@ -111,7 +122,7 @@ class TrainingPage extends Component {
       <div>
         <div>Осталось времени: {this.formatTime(this.state.remainingTime)}</div>
         <div>
-          Прошло времени:{' '}
+          Прошло времени:
           {this.formatTime(this.state.allTime - this.state.remainingTime)}
         </div>
         <div>Кол-во ошибок: {this.state.errorsCount}</div>
