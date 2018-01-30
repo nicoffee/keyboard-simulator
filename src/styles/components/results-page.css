@@ -9,3 +9,15 @@
     margin-right: 10px;
   }
 }
+
+.postitive {
+  color: #1abc9c;
+}
+
+.negative {
+  color: #e74c3c;
+}
+
+.unfinished {
+  color: #f1c40f;
+}

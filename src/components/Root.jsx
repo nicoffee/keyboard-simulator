@@ -24,7 +24,7 @@ const routes = [
 
 const Root = ({ store }) => (
   <Provider store={store}>
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <div className="content">
         <div className="inner">
           {routes.map((route, index) => (

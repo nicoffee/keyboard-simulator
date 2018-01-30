@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
+import styles from './../styles/components/training-page.css'; // eslint-disable-line no-unused-vars
 
 class TrainingPage extends Component {
   static propTypes = {
