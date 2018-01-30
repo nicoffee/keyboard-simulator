@@ -18,25 +18,25 @@ Installing dependencies
 yarn install
 ```
 
-## Running in development mode
+### Running in development mode
 
 ```
 yarn start
 ```
 
-## Creating production-ready build
+### Creating production-ready build
 
 ```
-yarn start
+yarn run build
 ```
 
-## Running the tests
+### Running the tests
 
 ```
 yarn run test
 ```
 
-## Running the lint (eslint required)
+### Running the lint (eslint required)
 
 ```
 yarn run lint
