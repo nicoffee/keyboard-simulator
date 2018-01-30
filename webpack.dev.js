@@ -1,44 +1,10 @@
-const path = require('path');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+const merge = require('webpack-merge');
+const common = require('./webpack.common.js');
 
-module.exports = {
-  entry: './src/index.jsx',
+module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './public',
     historyApiFallback: true
-  },
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public'),
-    publicPath: '/'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$|\.jsx$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1 } },
-          'postcss-loader'
-        ]
-      },
-      {
-        test: /\.svg$/,
-        loader: 'url-loader'
-      }
-    ]
-  },
-  resolve: {
-    extensions: ['.js', '.jsx']
-  },
-  plugins: []
-};
+  }
+});

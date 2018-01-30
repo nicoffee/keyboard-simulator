@@ -1,41 +1,14 @@
-const path = require('path');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+const merge = require('webpack-merge');
+const webpack = require('webpack');
+const common = require('./webpack.common.js');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-module.exports = {
-  entry: './src/index.js',
-  devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './public',
-    historyApiFallback: true
-  },
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public'),
-    publicPath: '/'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$|\.jsx$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader?modules']
-      },
-      {
-        test: /\.svg$/,
-        loader: 'url-loader'
-      }
-    ]
-  },
-  resolve: {
-    extensions: ['.js', '.jsx']
-  },
-  plugins: [new UglifyJsPlugin()]
-};
+module.exports = merge(common, {
+  devtool: 'source-map',
+  plugins: [
+    new UglifyJsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env.PUBLIC_URL': JSON.stringify('keyboard-simulator')
+    })]
+});
