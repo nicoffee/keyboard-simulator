@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import backLogo from './../img/001-left-arrow.svg';
@@ -10,20 +10,21 @@ const ResultsPage = ({ errorsCount, remainingTime, status }) => (
     <Link className="link" to="/">
       <img src={backLogo} alt="" />На стартовую
     </Link>
-    <Link className="link" to="/training">
-      <img src={repeatLogo} alt="" />Пройти тренировку еще раз
-    </Link>
-    <h2>Результаты:</h2>
     {status && (
-      <h1
-        className={status}>
-        {status === 'positive' && 'Успех'}
-        {status === 'unfinished' && 'Не завершено'}
-        {status === 'negative' && 'Неудача'}
-      </h1>
+      <Fragment>
+        <Link className="link" to="/training">
+          <img src={repeatLogo} alt="" />Пройти тренировку еще раз
+        </Link>
+        <h2>Результаты:</h2>
+        <h1 className={status}>
+          {status === 'positive' && 'Успех'}
+          {status === 'unfinished' && 'Не завершено'}
+          {status === 'negative' && 'Неудача'}
+        </h1>
+        {remainingTime && <p>Оставшееся время (сек): {remainingTime}</p>}
+        <p>Ошибок: {errorsCount}</p>
+      </Fragment>
     )}
-    {remainingTime && <p>Оставшееся время (сек): {remainingTime}</p>}
-    <p>Ошибок: {errorsCount}</p>
   </div>
 );
 

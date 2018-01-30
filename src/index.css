@@ -38,7 +38,3 @@ body {
   text-decoration: none;
   color: inherit;
 }
-
-:global a:hover {
-  text-decoration: underline;
-}

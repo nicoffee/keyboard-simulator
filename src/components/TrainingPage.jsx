@@ -16,7 +16,10 @@ class TrainingPage extends Component {
 
     const TIMER = 60;
     const LETTERS_COUNT = 20;
-    const lettersArray = generateRandomLettersArray(1072, 1103, LETTERS_COUNT);
+    const lettersArray = generateRandomLettersArray(
+      [[48, 57], [1072, 1103]],
+      LETTERS_COUNT
+    );
 
     this.state = {
       allTime: TIMER,
@@ -119,7 +122,8 @@ class TrainingPage extends Component {
           onClick={() => {
             this.props.updateResults({
               status: 'unfinished',
-              remainingTime: this.state.remainingTime
+              remainingTime: this.state.remainingTime,
+              errorsCount: this.state.errorsCount
             });
             setTimeout(() => this.props.history.push('/results'), 500);
           }}>

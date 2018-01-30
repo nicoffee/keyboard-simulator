@@ -9,16 +9,21 @@ button {
   font-weight: bold;
   font-size: inherit;
   cursor: pointer;
+  transition: all 500ms;
 
   &.start-button {
     font-size: 50px;
+
+    &:hover {
+      background-color: #16a085;
+    }
   }
 
   &.stop-button {
     background-color: #e74c3c;
 
     &:hover {
-      text-decoration: underline;
+      background-color: #c0392b;
     }
   }
 }

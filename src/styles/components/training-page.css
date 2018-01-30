@@ -1,12 +1,15 @@
+@import './../colors.css';
+
 .letters-container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   margin: 25px 0;
 
   div {
     padding: 10px 15px;
-    border: 1px solid black;
+    border: 1px solid var(--primary-color);
 
     &.done {
       border: 1px solid aquamarine;

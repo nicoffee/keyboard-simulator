@@ -4,9 +4,9 @@ import styles from './../styles/components/start-page.css'; // eslint-disable-li
 
 const StartPage = () => (
   <div className="start-container">
-    <button className="start-button">
-      <Link to="/training">Старт</Link>
-    </button>
+    <Link to="/training">
+      <button className="start-button">Старт</button>
+    </Link>
   </div>
 );
 
