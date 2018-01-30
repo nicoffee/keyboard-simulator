@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
+import { generateRandomLettersArray, formatTime } from './../utils';
 import styles from './../styles/components/training-page.css'; // eslint-disable-line no-unused-vars
 
 class TrainingPage extends Component {
@@ -13,8 +14,9 @@ class TrainingPage extends Component {
   constructor() {
     super();
 
-    const lettersArray = this.generateRandomLettersArray(1072, 1103, 5);
     const TIMER = 60;
+    const LETTERS_COUNT = 20;
+    const lettersArray = generateRandomLettersArray(1072, 1103, LETTERS_COUNT);
 
     this.state = {
       allTime: TIMER,
@@ -25,29 +27,6 @@ class TrainingPage extends Component {
       lettersArray
     };
   }
-
-  generateRandomLettersArray = (firstCharCode, lastCharCode, length) => {
-    let randomLettersArray = [];
-
-    for (let i = 0; i < length; i++) {
-      const charCode =
-        Math.floor(Math.random() * (lastCharCode - firstCharCode)) +
-        firstCharCode;
-      randomLettersArray.push({
-        charCode,
-        symbol: String.fromCharCode(charCode),
-        status: null
-      });
-    }
-
-    return randomLettersArray;
-  };
-
-  formatTime = s => {
-    const minuts = Math.floor(s / 60);
-    const seconds = s - minuts * 60;
-    return `${minuts}:${seconds < 10 ? '0' + seconds : seconds}`;
-  };
 
   componentDidMount() {
     this.props.updateResults({
@@ -121,10 +100,10 @@ class TrainingPage extends Component {
   render() {
     return (
       <div>
-        <div>Осталось времени: {this.formatTime(this.state.remainingTime)}</div>
+        <div>Осталось времени: {formatTime(this.state.remainingTime)}</div>
         <div>
           Прошло времени:
-          {this.formatTime(this.state.allTime - this.state.remainingTime)}
+          {formatTime(this.state.allTime - this.state.remainingTime)}
         </div>
         <div>Кол-во ошибок: {this.state.errorsCount}</div>
         <div>Осталось символов: {this.state.symbolsCount}</div>

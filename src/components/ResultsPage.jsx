@@ -16,7 +16,7 @@ const ResultsPage = ({ errorsCount, remainingTime, status }) => (
     <h2>Результаты:</h2>
     {status && (
       <h1
-        classNames={status}>
+        className={status}>
         {status === 'positive' && 'Успех'}
         {status === 'unfinished' && 'Не завершено'}
         {status === 'negative' && 'Неудача'}

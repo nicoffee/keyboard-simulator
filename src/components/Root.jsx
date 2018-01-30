@@ -1,6 +1,6 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import PropTypes from 'prop-types';
 import StartPage from './StartPage';
 import TrainingPageContainer from './../containers/TrainingPageContainer';
